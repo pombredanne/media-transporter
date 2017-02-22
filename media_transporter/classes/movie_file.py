@@ -45,7 +45,12 @@ class MovieFile(MediaFile):
         """Checks if a Movie already has a directory created on the media share.
         Directly moves a media file to its destination, or extracts and moves the
         movie from a RAR archive."""
-        existing_movie = os.listdir(self.movie_root_path)
+        try:
+            existing_movie = os.listdir(self.movie_root_path)
+        except:
+            os.makedirs(self.movie_root_path)
+            existing_movie = os.listdir(self.movie_root_path)
+
         if not [movie for movie in existing_movie if self.title in movie]:
             if self.has_video_extension:
                 self.move_media()

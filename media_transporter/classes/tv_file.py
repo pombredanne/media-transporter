@@ -58,7 +58,12 @@ class TvFile(MediaFile):
         """Checks if a TV show already has a directory created on the media share.
         Directly moves a media file to its destination, or extracts and moves the
         movie from a RAR archive."""
-        existing_episodes = os.listdir(self.tv_season_path)
+        try:
+            existing_episodes = os.listdir(self.tv_season_path)
+        except:
+            os.makedirs(self.tv_season_path)
+            existing_episodes = os.listdir(self.tv_season_path)
+
         if not [episode for episode in existing_episodes if self.episode_id in episode]:
             if self.has_video_extension:
                 self.move_media()
