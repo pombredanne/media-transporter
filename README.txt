@@ -1,5 +1,5 @@
-transporter
-===========
+media-transporter
+=================
 
 Manages the transportation of TV/Movie files to a mountable media share.
 
@@ -8,8 +8,8 @@ Contributers:
 
 -  Steve Coward (stevesugarstack.io)
 
-transporter is a project that arose out of laziness and boredom, mainly.
-There are plenty of similar or fully-featured alternatives like
+media-transporter is a project that arose out of laziness and boredom,
+mainly. There are plenty of similar or fully-featured alternatives like
 SickBeard and others, but I already had an existing workflow for:
 
 -  Polling RSS feeds and downloading torrent files
@@ -18,7 +18,7 @@ SickBeard and others, but I already had an existing workflow for:
    torrent client (`Transmission <https://transmissionbt.com>`__).
 
 The last piece involved the need to move completed downloads to my NAS.
-Enter ``transporter``. Here's how it works:
+Enter ``media-transporter``. Here's how it works:
 
 -  Create ``config.py`` in the same directory as ``transport.py``. Use
    ``config_example.py`` as a template. The main options are
@@ -29,19 +29,19 @@ Enter ``transporter``. Here's how it works:
    share where TV and Movies are stored.
 -  When executed (preferably automatically after a torrent is completed
    (Transmission is built to support this, for example)),
-   ``transporter`` determines if your configured media share is within
-   an acceptable range for storage capacity (configured in
+   ``media-transporter`` determines if your configured media share is
+   within an acceptable range for storage capacity (configured in
    ``config.py``).
--  If it is, ``transporter`` checks your Downloads folder for media
-   files and folders, and intelligently moves each of them to their
-   appropriate destination on your media share.
+-  If it is, ``media-transporter`` checks your Downloads folder for
+   media files and folders, and intelligently moves each of them to
+   their appropriate destination on your media share.
 -  Logs are written to the value of ``log file`` to record all actions
    taken during processing. Useful for debugging.
 
-The idea is that ``transporter`` will be able to be used on multiple
-platforms, including Windows. At the moment, ``transporter`` has only
-been tested on OS X and Linux, but it should be feasible to support
-Windows very easily.
+The idea is that ``media-transporter`` will be able to be used on
+multiple platforms, including Windows. At the moment,
+``media-transporter`` has only been tested on OS X and Linux, but it
+should be feasible to support Windows very easily.
 
 Requirements
 ------------

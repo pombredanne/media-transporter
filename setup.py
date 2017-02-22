@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(
-    name='transporter',
+    name='media-transporter',
     version='0.1',
     author='Steve Coward',
     author_email='steve.coward@gmail.com',
