@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
-import os, re, glob
+import os
+import re
+import glob
 import config
 from classes import TransportException, Storage, TvFile, MovieFile
 
@@ -12,7 +14,8 @@ if __name__ == '__main__':
 
     storage = Storage()
     if storage.capacity_reached():
-        raise TransportException('[!] Media share capacity reached, exiting...', True)
+        raise TransportException(
+            '[!] Media share capacity reached, exiting...', True)
 
     categorized_files = {
         'tv': [],
@@ -20,7 +23,8 @@ if __name__ == '__main__':
     }
 
     files_to_check = []
-    files_to_check.extend(flatten_list([glob.glob(extension) for extension in ['*.mkv','*.avi','*.mp4','*.mov']]))
+    files_to_check.extend(flatten_list(
+        [glob.glob(extension) for extension in ['*.mkv', '*.avi', '*.mp4', '*.mov']]))
     files_to_check.extend(filter(os.path.isdir, os.listdir(download_path)))
     for file in files_to_check:
         regex_tv = re.compile(r'%s' % config.regex_tv)
@@ -40,11 +44,13 @@ if __name__ == '__main__':
     for media_type, files in categorized_files.iteritems():
         if media_type == 'tv':
             for file_info in files:
-                tv_obj = TvFile(download_path, file_info.get('path'), file_info.get('info'))
+                tv_obj = TvFile(download_path, file_info.get(
+                    'path'), file_info.get('info'))
                 tv_obj.prepare_destination()
                 tv_obj.process()
         elif media_type == 'movie':
             for file_info in files:
-                movie_obj = MovieFile(download_path, file_info.get('path'), file_info.get('info'))
+                movie_obj = MovieFile(download_path, file_info.get(
+                    'path'), file_info.get('info'))
                 movie_obj.prepare_destination()
                 movie_obj.process()
