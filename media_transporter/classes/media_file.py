@@ -4,7 +4,7 @@ import re
 import glob
 import subprocess
 from . import Storage, Logger, TransportException
-import config
+from media_transporter import config
 
 flatten_list = lambda l: [item for sublist in l for item in sublist]
 """lambda: lambda function to flatten a list of nested lists to a single list."""

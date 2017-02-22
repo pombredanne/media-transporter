@@ -1,7 +1,7 @@
 import os
 import subprocess
 from . import TransportException
-import config
+from media_transporter import config
 
 
 class Storage():

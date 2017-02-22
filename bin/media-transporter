@@ -3,8 +3,8 @@
 import os
 import re
 import glob
-import config
-from classes import TransportException, Storage, TvFile, MovieFile
+from media_transporter import config
+from media_transporter.classes import TransportException, Storage, TvFile, MovieFile
 
 flatten_list = lambda l: [item for sublist in l for item in sublist]
 """lambda: lambda function to flatten a list of nested lists to a single list."""

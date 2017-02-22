@@ -9,5 +9,6 @@ setup(
     license='LICENSE.txt',
     description='Manages the transportation of TV/Movie files to a mountable media share.',
     long_description=open('README.txt').read(),
-    packages=['transporter', 'transporter.classes'],
+    scripts=['bin/media-transporter'],
+    packages=['media_transporter', 'media_transporter.classes'],
 )

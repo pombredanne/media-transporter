@@ -1,6 +1,6 @@
 import os
 from . import MediaFile, Logger
-import config
+from media_transporter import config
 
 
 class MovieFile(MediaFile):

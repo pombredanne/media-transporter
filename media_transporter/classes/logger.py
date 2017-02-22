@@ -1,6 +1,6 @@
 import os
 from datetime import datetime
-import config
+from media_transporter import config
 
 script_path = '%s/../' % os.path.dirname(os.path.abspath(__file__))
 """string: path to script being executed."""

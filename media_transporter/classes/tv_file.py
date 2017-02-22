@@ -1,5 +1,5 @@
 import os
-import config
+from media_transporter import config
 from . import Logger, MediaFile
 
 
