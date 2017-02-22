@@ -50,6 +50,17 @@ Requirements
 -  ``unrar`` via either apt-get/yum (Linux), homebrew (OS X), WinRAR
    (Windows)
 
+Installation
+------------
+
+.. code:: sh
+
+    $ pip install transporter
+
+.. code:: sh
+
+    $ python setup.py install
+
 Things to do
 ------------
 

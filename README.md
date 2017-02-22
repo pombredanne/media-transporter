@@ -1,7 +1,7 @@
 transporter
 ==========
 
-Manages the transportation of TV/Movie files to a mountable media shares.
+Manages the transportation of TV/Movie files to a mountable media share.
 
 #### Contributers:
 
@@ -27,6 +27,18 @@ Requirements
 
 - Python 2.*
 - `unrar` via either apt-get/yum (Linux), homebrew (OS X), WinRAR (Windows)
+
+
+Installation
+----
+```sh
+$ pip install transporter
+```
+
+
+```sh
+$ python setup.py install
+```
 
 
 Things to do
