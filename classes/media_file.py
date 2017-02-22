@@ -7,9 +7,34 @@ from . import Storage, Logger, TransportException
 import config
 
 flatten_list = lambda l: [item for sublist in l for item in sublist]
+"""lambda: lambda function to flatten a list of nested lists to a single list."""
 
 
 class MediaFile(Storage):
+    """Generic class to perform tasks required by both TvFile and MovieFile.
+
+    MediaFile mainly handles common functions such as extracting and moving
+    media files from one place to another. This class is also responsible
+    for light text formatting of media titles.
+
+    MediaFile inherits from the Storage class, allowing MediaFile to access
+    methods and parameters essential to the process of moving files from one
+    place to another.
+
+    Attributes
+    ----------
+        download_path: str
+            Full path to the file being operated on.
+        file_name: str
+            Name of file being operated on.
+        title: string
+            Original name of the media file. `title` is
+            transformed to a human-readable format inline.
+        has_video_extension: bool
+            Returns True when `file_name` has an acceptable
+            media file extension.
+
+    """
 
     def __init__(self, download_path, file_name, title):
         self.file_name = file_name
@@ -23,6 +48,8 @@ class MediaFile(Storage):
         Storage.__init__(self)
 
     def move_media(self):
+        """Moves a file from a download path to its final destination
+        on the media share."""
         from . import TvFile, MovieFile
 
         if isinstance(self, MovieFile):
@@ -34,6 +61,8 @@ class MediaFile(Storage):
                     self.movie_root_path)
 
     def extract_media(self):
+        """Extracts a media file from a series of RAR files, then moves it
+        to its final destination on the media share."""
         from . import TvFile, MovieFile
 
         rar_files = glob.glob('*.rar')

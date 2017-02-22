@@ -7,6 +7,7 @@ import config
 from classes import TransportException, Storage, TvFile, MovieFile
 
 flatten_list = lambda l: [item for sublist in l for item in sublist]
+"""lambda: lambda function to flatten a list of nested lists to a single list."""
 
 if __name__ == '__main__':
     download_path = os.path.expanduser(config.download_path)
@@ -22,10 +23,15 @@ if __name__ == '__main__':
         'movie': [],
     }
 
+    """Gather any media files and folders within the user-specified download directory."""
     files_to_check = []
     files_to_check.extend(flatten_list(
         [glob.glob(extension) for extension in ['*.mkv', '*.avi', '*.mp4', '*.mov']]))
     files_to_check.extend(filter(os.path.isdir, os.listdir(download_path)))
+
+    """Sort files and folders into tv or movie categories.
+
+    Store the file path and any regex-matched information for later use."""
     for file in files_to_check:
         regex_tv = re.compile(r'%s' % config.regex_tv)
         regex_movie = re.compile(r'%s' % config.regex_movie)
@@ -41,6 +47,7 @@ if __name__ == '__main__':
                 'info': regex_movie.search(file).groups()
             })
 
+    """Loop through and process TV and Movie files."""
     for media_type, files in categorized_files.iteritems():
         if media_type == 'tv':
             for file_info in files:
