@@ -65,9 +65,12 @@ class MediaFile(Storage):
         to its final destination on the media share."""
         from . import TvFile, MovieFile
 
+        unrar_command = ''
         rar_files = glob.glob('*.rar')
-        unrar_command = '%s x %s &>/dev/null' % (
-            config.unrar_path, rar_files[0])
+        if rar_files:
+            unrar_command = '%s x %s &>/dev/null' % (
+                config.unrar_path, rar_files[0])
+
         try:
             destination_path = ''
             message = '[-] %s wasn\'t found. Extracting and moving...'
@@ -79,7 +82,8 @@ class MediaFile(Storage):
                 destination_path = self.movie_root_path
                 Logger.log(message % self.title)
 
-            subprocess.check_output(unrar_command, shell=True)
+            if rar_files:
+                subprocess.check_output(unrar_command, shell=True)
             extracted_files = flatten_list([glob.glob(extension) for extension in [
                                            '*.mkv', '*.avi', '*.mp4', '*.mov']])
             for file in extracted_files:
