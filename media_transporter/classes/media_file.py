@@ -68,7 +68,7 @@ class MediaFile(Storage):
         unrar_command = ''
         rar_files = glob.glob('*.rar')
         if rar_files:
-            unrar_command = '%s x %s &>/dev/null' % (
+            unrar_command = '%s x -o- %s &>/dev/null' % (
                 self.config.unrar_path, rar_files[0])
 
         try:
@@ -83,7 +83,7 @@ class MediaFile(Storage):
                 Logger.log(message % self.title)
 
             if rar_files:
-                subprocess.check_output(unrar_command, shell=True)
+                subprocess.call(unrar_command, shell=True)
             extracted_files = flatten_list([glob.glob(extension) for extension in [
                                            '*.mkv', '*.avi', '*.mp4', '*.mov']])
             for file in extracted_files:

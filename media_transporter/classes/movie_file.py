@@ -50,8 +50,10 @@ class MovieFile(MediaFile):
             os.makedirs(self.movie_root_path)
             existing_movie = os.listdir(self.movie_root_path)
 
-        if not [movie for movie in existing_movie if self.title in movie]:
+        if not [movie for movie in existing_movie if self.title.lower() in movie.lower()]:
             if self.has_video_extension:
                 self.move_media()
             else:
                 self.extract_media()
+        else:
+            Logger.log('[-] %s already exists. Skipping...' % self.title)

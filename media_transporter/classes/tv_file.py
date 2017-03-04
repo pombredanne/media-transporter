@@ -1,7 +1,6 @@
 import os
 from . import Logger, MediaFile
 
-
 class TvFile(MediaFile):
     """Class to handle specific actions when dealing with a TV show file.
 
@@ -63,8 +62,11 @@ class TvFile(MediaFile):
             os.makedirs(self.tv_season_path)
             existing_episodes = os.listdir(self.tv_season_path)
 
-        if not [episode for episode in existing_episodes if self.episode_id in episode]:
+        # Check if episode already exists in destination
+        if not [episode for episode in existing_episodes if self.episode_id.lower() in episode.lower()]:
             if self.has_video_extension:
                 self.move_media()
             else:
                 self.extract_media()
+        else:
+            Logger.log('[-] %s Season %s Episode %s already exists. Skipping...' % (self.title, self.season, self.episode))
