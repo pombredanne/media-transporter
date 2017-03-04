@@ -20,13 +20,15 @@ SickBeard and others, but I already had an existing workflow for:
 The last piece involved the need to move completed downloads to my NAS.
 Enter ``media-transporter``. Here's how it works:
 
--  Create ``config.py`` in the same directory as ``transport.py``. Use
+-  Create ``config.py`` in a directory of your choosing. Use
    ``config_example.py`` as a template. The main options are
    ``media_shares``, ``download_path``, and ``unrar_path``. Adjust these
    to match the path to your media share, where you have finished
    downloads, and the **absolute** path to the ``unrar`` binary. The
    ``share_[tv|movie]_*`` config options point to the path on your media
    share where TV and Movies are stored.
+-  ``media-transporter`` requires one command line argument. ``-c``
+   should be the *absolute* path to your ``config.py`` file.
 -  When executed (preferably automatically after a torrent is completed
    (Transmission is built to support this, for example)),
    ``media-transporter`` determines if your configured media share is
