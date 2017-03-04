@@ -1,10 +1,8 @@
 import os
 from datetime import datetime
-from media_transporter import config
 
 script_path = '%s/../' % os.path.dirname(os.path.abspath(__file__))
 """string: path to script being executed."""
-
 
 class Logger():
     """Responsible for logging messages from the script and writing to disk."""
@@ -23,6 +21,6 @@ class Logger():
         None
         """
         dt = datetime.now()
-        with open('%s/%s' % (script_path, config.logfile), 'a') as fh:
+        with open('%s/%s' % (script_path, 'transmission.log'), 'a') as fh:
             fh.write('[%s] %s\n' % (dt.strftime('%Y-%m-%d %H:%M:%S'), text))
         print '[%s] %s' % (dt.strftime('%Y-%m-%d %H:%M:%S'), text)

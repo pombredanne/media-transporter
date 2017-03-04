@@ -1,5 +1,4 @@
 import os
-from media_transporter import config
 from . import Logger, MediaFile
 
 
@@ -21,20 +20,20 @@ class TvFile(MediaFile):
 
     """
 
-    def __init__(self, download_path, file_name, show_info):
+    def __init__(self, config, download_path, file_name, show_info):
         title, episode_id, season, episode = show_info
         self.episode_id = episode_id
         self.season = int(season)
         self.episode = int(episode)
-        MediaFile.__init__(self, download_path, file_name, title)
+        MediaFile.__init__(self, config, download_path, file_name, title)
 
     def prepare_destination(self):
         """Checks if there is storage capacity on the media share,
         and if there is, attempt to make the TV show's directory structure
         on the media share in advance of extracting and moving."""
-        self.tv_root_path = config.share_tv_root_path % (
+        self.tv_root_path = self.config.share_tv_root_path % (
             self.share_path, self.title)
-        self.tv_season_path = config.share_tv_season_path % (
+        self.tv_season_path = self.config.share_tv_season_path % (
             self.share_path, self.title, self.season)
 
         if os.path.isdir(self.tv_root_path):

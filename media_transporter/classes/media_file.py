@@ -4,7 +4,6 @@ import re
 import glob
 import subprocess
 from . import Storage, Logger, TransportException
-from media_transporter import config
 
 flatten_list = lambda l: [item for sublist in l for item in sublist]
 """lambda: lambda function to flatten a list of nested lists to a single list."""
@@ -36,16 +35,17 @@ class MediaFile(Storage):
 
     """
 
-    def __init__(self, download_path, file_name, title):
+    def __init__(self, config, download_path, file_name, title):
         self.file_name = file_name
         self.title = re.sub(r'(\.|_){1,}', ' ', title)
         self.download_path = download_path
         self.has_video_extension = self.file_name.endswith(
             ('mkv', 'avi', 'mp4', 'mov'))
+        self.config = config
 
         if os.path.isdir('%s/%s' % (download_path, file_name)):
             os.chdir('%s/%s' % (download_path, file_name))
-        Storage.__init__(self)
+        Storage.__init__(self, config)
 
     def move_media(self):
         """Moves a file from a download path to its final destination
@@ -69,7 +69,7 @@ class MediaFile(Storage):
         rar_files = glob.glob('*.rar')
         if rar_files:
             unrar_command = '%s x %s &>/dev/null' % (
-                config.unrar_path, rar_files[0])
+                self.config.unrar_path, rar_files[0])
 
         try:
             destination_path = ''

@@ -1,7 +1,6 @@
 import os
 import subprocess
 from . import TransportException
-from media_transporter import config
 
 
 class Storage():
@@ -15,7 +14,8 @@ class Storage():
 
     """
 
-    def __init__(self):
+    def __init__(self, config):
+        self.config = config
         self.share_path = self.locate_media_share()
 
     def locate_media_share(self):
@@ -29,7 +29,7 @@ class Storage():
             TransportException
                 Raised exception when media share was not found.
         """
-        media_shares = config.media_shares
+        media_shares = self.config.media_shares
         for path in media_shares.split(','):
             if os.path.isdir(path):
                 return path
@@ -63,6 +63,6 @@ class Storage():
 
         percentage_free, available_space = self.get_volume_capacity()
         percentage_free = int(percentage_free.replace('%', ''))
-        if percentage_free >= int(config.safe_capacity_percentage):
+        if percentage_free >= int(self.config.safe_capacity_percentage):
             return True
         return False

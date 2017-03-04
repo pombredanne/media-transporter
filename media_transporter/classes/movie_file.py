@@ -1,6 +1,5 @@
 import os
 from . import MediaFile, Logger
-from media_transporter import config
 
 
 class MovieFile(MediaFile):
@@ -21,15 +20,15 @@ class MovieFile(MediaFile):
 
     """
 
-    def __init__(self, download_path, file_name, movie_info):
+    def __init__(self, config, download_path, file_name, movie_info):
         title, year, resolution = movie_info
-        MediaFile.__init__(self, download_path, file_name, title)
+        MediaFile.__init__(self, config, download_path, file_name, title)
 
     def prepare_destination(self):
         """Checks if there is storage capacity on the media share,
         and if there is, attempt to make the Movie's directory structure
         on the media share in advance of extracting and moving."""
-        self.movie_root_path = config.share_movie_root_path % (
+        self.movie_root_path = self.config.share_movie_root_path % (
             self.share_path, self.title)
 
         if os.path.isdir(self.movie_root_path):
